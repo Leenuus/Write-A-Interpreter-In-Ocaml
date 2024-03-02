@@ -1,0 +1,10 @@
+
+#use "topfind";;
+#require "base";;
+#use "lib/lexer.ml"
+#trace next_token;;
+#trace next_num;;
+#trace next_ascii;;
+let input2 = "let a = 1;";;
+let l = new_lexer input2;;
+let nt = next_token;;
