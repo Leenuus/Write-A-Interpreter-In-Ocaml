@@ -1,0 +1,7 @@
+(library
+  ; NOTE: 
+  ; so we import a external package with
+  ; dune build tools in `dune`
+  ; excutable or library directory
+ (libraries base)
+ (name interpreter))
