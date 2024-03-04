@@ -29,7 +29,8 @@ type token =
   | Ident of string
   (* Literal *)
   | LiteralInt of int
-  | LiteralFloat of int
+  (* TODO: Float Literal  *)
+  | LiteralFloat of float
   (* TODO: quotes  *)
   | Dquote
   | Squote
