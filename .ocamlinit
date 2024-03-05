@@ -1,10 +1,27 @@
-
 #use "topfind";;
 #require "base";;
 #use "lib/lexer.ml"
 #trace next_token;;
 #trace next_num;;
 #trace next_ascii;;
-let input2 = "let a = 1;";;
-let l = new_lexer input2;;
-let nt = next_token;;
+
+let input3 = "let five = 5;
+let ten = 10;
+let add = fn(x, y) {
+x + y;
+};
+let result = add(five, ten);
+!-/*5;
+5 < 10 > 5;"
+
+(* let five = 5; *)
+let l3 = new_lexer input3
+let l, t = next_token l3
+
+let l = new_lexer input3
+let l, t = next_token l;;
+t;;
+let () = assert 
+(match t with 
+Let -> true
+| _ -> false)
