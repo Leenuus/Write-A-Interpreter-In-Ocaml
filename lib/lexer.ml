@@ -2,19 +2,18 @@ open Base
 
 (* we use enum to present our tokens *)
 type token =
-  | (* delimiter1 *)
-    Semicolon
-  (* Not implemented or crazy input *)
-  | Ilegal
-  | Comma
-  | Eof
+  | Ilegal (* Not implemented or crazy input *)
+  (* delimiter1 *)
+  | Semicolon (* DONE: *)
+  | Comma (* DONE: *)
+  | Eof (* DONE: *)
   (* delimiter2 *)
-  | Lparen
-  | Rparen
-  | Lbrace
-  | Rbrace
-  | Lbracket
-  | Rbracket
+  | Lparen (* DONE: *)
+  | Rparen (* DONE: *)
+  | Lbrace (* DONE: *)
+  | Rbrace (* DONE: *)
+  | Lbracket (* DONE: *)
+  | Rbracket (* DONE: *)
   (* keyword *)
   | Assign (* DONE: *)
   | Let (* DONE: *)
@@ -24,22 +23,25 @@ type token =
   | If (* DONE: *)
   | Else (* DONE: *)
   | Return (* DONE: *)
-  (* alrithmetic *)
-  | Plus
-  | Minus
-  | Mul
-  | Div
-  | Mod
+  (* misc *)
+  | Plus (* DONE: *)
+  | Dash (* DONE: *)
+  | Asterisk (* DONE: *)
+  | Bang (* DONE: *)
+  | Slash (* DONE: *)
+  | Percent (* DONE: *)
+  | Lthan (* DONE: *)
+  | Gthan (* DONE: *)
   (* indentifier *)
-  | Ident of string
+  | Ident of string (* DONE: *)
   (* Literal *)
-  | LiteralInt of int
+  | LiteralInt of int (* DONE: *)
   (* TODO: Float Literal  *)
   | LiteralFloat of float
-  (* TODO: quotes  *)
+  (* TODO: quotes and literal string  *)
   | Dquote
   | Squote
-  | LiteralStr of int
+  | LiteralStr of string
 
 (* NOTE:we are going to write a parse token function *)
 (*  let's name it as `next_token` *)
@@ -141,10 +143,14 @@ let rec next_token (l : lexer) =
   | Some '=' -> (next_char l, Assign)
   (* NOTE: alrithmetic *)
   | Some '+' -> (next_char l, Plus)
-  | Some '-' -> (next_char l, Minus)
-  | Some '*' -> (next_char l, Mul)
-  | Some '/' -> (next_char l, Div)
-  | Some '%' -> (next_char l, Mod)
+  | Some '-' -> (next_char l, Dash)
+  | Some '*' -> (next_char l, Asterisk)
+  | Some '/' -> (next_char l, Slash)
+  | Some '%' -> (next_char l, Percent)
+  | Some '!' -> (next_char l, Bang)
+  | Some '>' -> (next_char l, Gthan)
+  | Some '<' -> (next_char l, Lthan)
+  (* | Some '\'' ->   *)
   | Some c ->
       (* NOTE: deal with indentifier or keyword which  *)
       (* always starts with `[a-zA-Z]` *)
