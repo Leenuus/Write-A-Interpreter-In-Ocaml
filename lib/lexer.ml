@@ -16,9 +16,14 @@ type token =
   | Lbracket
   | Rbracket
   (* keyword *)
-  | Assign
-  | Let
-  | Funcc
+  | Assign (* DONE: *)
+  | Let (* DONE: *)
+  | Funct (* DONE: *)
+  | True (* DONE: *)
+  | False (* DONE: *)
+  | If (* DONE: *)
+  | Else (* DONE: *)
+  | Return (* DONE: *)
   (* alrithmetic *)
   | Plus
   | Minus
@@ -79,22 +84,29 @@ let is_delimeter (c : char) =
   | ' ' -> true
   | _ -> false
 
-(* TODO: what if we meet EOF when we are parsing a identifier? *)
+(* NOTE: what if we meet EOF when we are parsing a identifier? *)
 (* here I think it means the identitfier we are parsing is ended, so we just return it *)
 
-let keyword_or_ident (s: string) = 
+let lookup_ident (s : string) =
   match s with
-  "let" -> Let
-  | "function" -> Funcc
+  | "let" -> Let
+  | "function" -> Funct
+  | "if" -> If
+  | "else" -> Else
+  | "true" -> True
+  | "false" -> False
+  | "return" -> Return
   | _ -> Ident s
 
-(* NOTE: don't parse an empty string as acc, use the __leading character__ as acc *)
-let rec next_ascii (l : lexer) (acc : string) =
+(* NOTE: don't pass an empty string to this function
+   (* as acc, use the __leading character__ as acc *) *)
+let rec next_ident (l : lexer) (acc : string) =
   match l.ch with
-  | None -> (l, keyword_or_ident acc)
+  | None -> (l, lookup_ident acc)
   | Some c ->
-      if Char.is_alpha c || Char.is_digit c then next_ascii (next_char l) (acc ^ String.make 1 c)
-      else if is_delimeter c then (l, keyword_or_ident acc)
+      if Char.is_alpha c || Char.is_digit c then
+        next_ident (next_char l) (acc ^ String.make 1 c)
+      else if is_delimeter c then (l, lookup_ident acc)
       else (l, Ilegal)
 
 let rec next_num (l : lexer) (acc : string) =
@@ -136,6 +148,6 @@ let rec next_token (l : lexer) =
   | Some c ->
       (* NOTE: deal with indentifier or keyword which  *)
       (* always starts with `[a-zA-Z]` *)
-      if Char.is_alpha c then next_ascii (next_char l) (String.make 1 c)
+      if Char.is_alpha c then next_ident (next_char l) (String.make 1 c)
       else if Char.is_digit c then next_num (next_char l) (String.make 1 c)
       else (l, Ilegal)
