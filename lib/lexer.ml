@@ -32,6 +32,9 @@ type token =
   | Percent (* DONE: *)
   | Lthan (* DONE: *)
   | Gthan (* DONE: *)
+  (* two chars *)
+  | Eq
+  | NotEq
   (* indentifier *)
   | Ident of string (* DONE: *)
   (* Literal *)
@@ -124,6 +127,24 @@ let skip_whitespace (l : lexer) =
   | None -> l
   | Some c -> if Char.is_whitespace c then next_char l else l
 
+let peek_char (l : lexer) =
+  let next = l.pos + 1 in
+  if next >= String.length l.input then None else Some (String.get l.input next)
+
+let deal_with_eq_sign (l : lexer) =
+  match peek_char l with
+  | None -> (next_char l, Assign)
+  | Some c ->
+      if Char.( = ) c '=' then (next_char (next_char l), Eq)
+      else (next_char l, Assign)
+
+let deal_with_bang (l : lexer) =
+  match peek_char l with
+  | None -> (next_char l, Bang)
+  | Some c ->
+      if Char.( = ) c '=' then (next_char (next_char l), NotEq)
+      else (next_char l, Bang)
+
 (* TODO: write a return value annotation *)
 let rec next_token (l : lexer) =
   let l = skip_whitespace l in
@@ -140,14 +161,13 @@ let rec next_token (l : lexer) =
   | Some '}' -> (next_char l, Rbrace)
   | Some ';' -> (next_char l, Semicolon)
   | Some ',' -> (next_char l, Comma)
-  | Some '=' -> (next_char l, Assign)
-  (* NOTE: alrithmetic *)
+  | Some '=' -> deal_with_eq_sign l
   | Some '+' -> (next_char l, Plus)
   | Some '-' -> (next_char l, Dash)
   | Some '*' -> (next_char l, Asterisk)
   | Some '/' -> (next_char l, Slash)
   | Some '%' -> (next_char l, Percent)
-  | Some '!' -> (next_char l, Bang)
+  | Some '!' -> deal_with_bang l
   | Some '>' -> (next_char l, Gthan)
   | Some '<' -> (next_char l, Lthan)
   (* | Some '\'' ->   *)
