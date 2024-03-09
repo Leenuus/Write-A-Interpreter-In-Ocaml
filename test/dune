@@ -1,2 +1,19 @@
 (test
- (name test_interpreter))
+ (name parse_signs)
+ (libraries interpreter)
+ (modules parse_signs))
+
+(test
+ (name parse_assignment)
+ (libraries interpreter)
+ (modules parse_assignment))
+
+(test
+ (name parse_function)
+ (libraries interpreter)
+ (modules parse_function))
+
+(test
+ (name parse_keywords)
+ (libraries interpreter)
+ (modules parse_keywords))
