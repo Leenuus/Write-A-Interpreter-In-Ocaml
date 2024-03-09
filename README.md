@@ -1,8 +1,18 @@
 ## Write a Interpreter in Ocaml
 
+Just a re-write in `ocaml` attempt for self-learning functional programming;
+
+The book I follow is [Thorsten Ball's amazing work](https://interpreterbook.com/) 
+
+## Progress
+
 ### TODO
 
-1. write a `repl`
+1. write a `repl`, 2024-03-09
+
+### DONE
+
+1. finish chapter 1, 2024-03-09
 
 ## References
 
