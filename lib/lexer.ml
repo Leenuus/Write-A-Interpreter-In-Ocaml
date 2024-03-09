@@ -58,7 +58,9 @@ type lexer = { input : string; pos : int; ch : char option }
 
 (* NOTE: lexer contructor *)
 let new_lexer (input : string) =
-  { input; pos = 0; ch = Some (String.get input 0) }
+  match input with
+  "" -> None
+  | _ -> Some { input; pos = 0; ch = Some (String.get input 0) }
 
 let next_char (l : lexer) =
   {

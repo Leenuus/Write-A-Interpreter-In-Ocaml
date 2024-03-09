@@ -2,7 +2,7 @@ open Interpreter.Lexer
 
 (* t1 *)
 let input = "let a = 1;"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Let = t)
 let l, t = next_token l
@@ -19,7 +19,7 @@ let _ = l
 
 (* t2 *)
 let input = "let five = 5;"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Let = t)
 let l, t = next_token l
@@ -36,7 +36,7 @@ let _ = l
 
 (* t3 *)
 let input = "let ten = 10;"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Let = t)
 let l, t = next_token l

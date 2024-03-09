@@ -1,7 +1,7 @@
 open Interpreter.Lexer
 
 let input = "let add = fn(x, y) {\nx + y;\n}; "
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Let = t)
 let l, t = next_token l
@@ -43,7 +43,7 @@ let _ = l
 
 
 let input = "let result = add(five, ten);"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Let = t)
 let l, t = next_token l
@@ -69,7 +69,7 @@ let () = assert (Eof = t)
 let _ = l
 
 let input = "!-/*5;"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (Bang = t)
 let l, t = next_token l
@@ -87,7 +87,7 @@ let () = assert (Eof = t)
 let _ = l
 
 let input = "5 < 10 > 5;"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (LiteralInt 5 = t)
 let l, t = next_token l

@@ -2,7 +2,7 @@ open Interpreter.Lexer
 
 (* parse if and return *)
 let input = "if (5 < 10) {\nreturn true;\n} else {\nreturn false;\n}"
-let l = new_lexer input
+let l = Option.get (new_lexer input)
 let l, t = next_token l
 let () = assert (t = If)
 let l, t = next_token l
