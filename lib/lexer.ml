@@ -95,7 +95,7 @@ let is_delimeter (c : char) =
 let lookup_ident (s : string) =
   match s with
   | "let" -> Let
-  | "function" -> Funct
+  | "fn" -> Funct
   | "if" -> If
   | "else" -> Else
   | "true" -> True
