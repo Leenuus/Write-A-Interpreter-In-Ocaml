@@ -12,6 +12,8 @@ indent_style = space
 indent_size = 2
 
 
+
+
 # Matches multiple files with brace expansion notation
 # Set default charset
 # [*.{js,py}]
@@ -23,8 +25,8 @@ indent_size = 2
 # indent_size = 4
 
 # Tab indentation (no size specified)
-# [Makefile]
-# indent_style = tab
+[Makefile]
+indent_style = tab
 
 # Indentation override for all JS under lib directory
 # [lib/**.js]
