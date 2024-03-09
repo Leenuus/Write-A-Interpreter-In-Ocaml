@@ -45,6 +45,7 @@ type token =
   | Dquote
   | Squote
   | LiteralStr of string
+[@@deriving show]
 
 (* NOTE:we are going to write a parse token function *)
 (*  let's name it as `next_token` *)
@@ -179,3 +180,4 @@ let rec next_token (l : lexer) =
       if Char.is_alpha c then next_ident (next_char l) (String.make 1 c)
       else if Char.is_digit c then next_num (next_char l) (String.make 1 c)
       else (l, Ilegal)
+;;
