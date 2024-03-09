@@ -2,7 +2,7 @@
 
 ### TODO
 
-1. Fix neovim warning in `.ocamlinit`
+1. write a `repl`
 
 ## References
 
