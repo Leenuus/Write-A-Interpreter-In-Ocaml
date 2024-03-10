@@ -183,3 +183,8 @@ let rec next_token (l : lexer) =
       else if Char.is_digit c then next_num (next_char l) (String.make 1 c)
       else (l, Ilegal)
 ;;
+
+let rec all_tokens (l: lexer) acc =
+  match next_token l with
+  _, Eof -> acc
+  | l, t -> all_tokens l (acc @ [t])
