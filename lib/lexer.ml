@@ -90,7 +90,9 @@ let is_delimeter (c : char) =
   | '/' -> true
   | '%' -> true
   | ' ' -> true
-  | _ -> false
+  |  c ->
+      if Char.is_whitespace c then true
+      else false
 
 (* NOTE: what if we meet EOF when we are parsing a identifier? *)
 (* here I think it means the identitfier we are parsing is ended, so we just return it *)
