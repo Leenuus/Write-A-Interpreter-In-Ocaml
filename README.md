@@ -4,6 +4,10 @@ Just a re-write in `ocaml` attempt for self-learning functional programming;
 
 The book I follow is [Thorsten Ball's amazing work](https://interpreterbook.com/) 
 
+## NOTE
+
+1. The parser we are going to write is a recursive descent parser. And in particular, it’s a “top down operator precedence” parser, sometimes called “Pratt parser”, after its inventor Vaughan Pratt
+
 ## Progress
 
 ### TODO
